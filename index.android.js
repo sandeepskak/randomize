@@ -32,9 +32,9 @@ export default class Randomize extends Component {
         </Text>
         <Image source={pic} style={{width: 350, height: 350}}/>
         <View style={styles.viewInstructions}>
-          <Greeting name="Sandeep" />
-          <Greeting name="S" />
-          <Greeting name="Blah" />
+          <Blink name="Sandeep" />
+          <Blink name="S" />
+          <Blink name="Blah" />
         </View>
       </View>
     );
@@ -46,6 +46,22 @@ class Greeting extends Component {
     return (
       <Text>Hello {this.props.name}!</Text>
     );
+  }
+}
+
+class Blink extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {showText: true};
+    setInterval(()=>{
+      this.setState({ showText: !this.state.showText});
+    }, 1000);
+  }
+  render() {
+    let display = this.state.showText ? this.props.name : '';
+    return (
+      <Text>{display}</Text>
+    )
   }
 }
 
