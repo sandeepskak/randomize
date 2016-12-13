@@ -8,91 +8,61 @@ import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
-  Text,
-  View,
   Image
 } from 'react-native';
+import { Container,
+  Icon,
+  View,
+  DeckSwiper,
+  Card,
+  CardItem,
+  Thumbnail,
+  Text
+} from 'native-base';
+
+const cards = [
+    {
+      name: 'One',
+      image: {
+        uri: "http://www.newton.ac.uk/files/covers/968361.jpg",
+      },
+    },
+    {
+      name: 'Two',
+      image: {
+        uri: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSs1wLnrPyLIQm5rs6rK5bJ-0Dpox2tVXJo3RH032z2Edz_VSb6lA",
+      }
+    }
+];
 
 export default class Randomize extends Component {
   render() {
-    let pic = {
-      uri: "http://www.newton.ac.uk/files/covers/968361.jpg"
-    }
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
-        </Text>
-        <Image source={pic} style={{width: 350, height: 350}}/>
-        <View style={styles.viewInstructions}>
-          <Blink name="Sandeep" />
-          <Blink name="S" />
-          <Blink name="Blah" />
-        </View>
-      </View>
+        <Container>
+          <View>
+            <DeckSwiper
+              dataSource={cards}
+              renderItem={(item) =>
+                <Card style={{ elevation: 3 }}>
+                  <CardItem>
+                    <Thumbnail source={item.image} />
+                    <Text>Instrumental Songs</Text>
+                    <Text note>Guitar</Text>
+                  </CardItem>
+                  <CardItem>
+                    <Image style={{ resizeMode: 'cover', width: null }} source={item.image} />
+                  </CardItem>
+                  <CardItem>
+                    <Icon name="ios-heart" style={{ color: '#ED4A6A' }} />
+                    <Text>{item.name}</Text>
+                  </CardItem>
+                </Card>
+              }>
+            </DeckSwiper>
+          </View>
+        </Container>
     );
   }
 }
-
-class Greeting extends Component {
-  render() {
-    return (
-      <Text>Hello {this.props.name}!</Text>
-    );
-  }
-}
-
-class Blink extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {showText: true};
-    setInterval(()=>{
-      this.setState({ showText: !this.state.showText});
-    }, 1000);
-  }
-  render() {
-    let display = this.state.showText ? this.props.name : '';
-    return (
-      <Text>{display}</Text>
-    )
-  }
-}
-
-class LotsOfGreetings extends Component {
-  render() {
-    return (
-      <View style={{alignItems: center}}>
-      </View>
-      )
-  }
-}
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-  viewInstructions: {
-    alignItems: 'center'
-  }
-});
 
 AppRegistry.registerComponent('Randomize', () => Randomize);
