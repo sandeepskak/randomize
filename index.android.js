@@ -20,6 +20,7 @@ import { Container,
   Text
 } from 'native-base';
 import { RandomSwiper } from './app/components/RandomSwiper';
+import { Xkcd } from './app/services/Xkcd';
 
 export default class Randomize extends Component {
 
@@ -28,6 +29,7 @@ export default class Randomize extends Component {
         <Container>
           <View>
             <RandomSwiper></RandomSwiper>
+            <Xkcd></Xkcd>
           </View>
         </Container>
     );
