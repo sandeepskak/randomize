@@ -23,7 +23,7 @@ const cards = [
     {
       name: 'Two',
       image: {
-        uri: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSs1wLnrPyLIQm5rs6rK5bJ-0Dpox2tVXJo3RH032z2Edz_VSb6lA",
+        uri: "http://www.newton.ac.uk/files/covers/968361.jpg",
       }
     },
     {
@@ -42,6 +42,20 @@ export class RandomSwiper extends Component {
 
   previous() {
     console.log('previous called');
+  }
+
+  componentWillMount() {
+    fetch('http://192.168.0.104:8080/')
+       .then((data) => data.json())
+       .then((data) => {
+          cards.push({
+            name: 'Xkcd',
+            image: {
+              uri: data.img,
+            }
+          })
+        })
+       .done();
   }
 
   render() {
