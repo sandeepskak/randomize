@@ -19,18 +19,21 @@ const cards = [
       image: {
         uri: "http://www.newton.ac.uk/files/covers/968361.jpg",
       },
+      source: 'randomCover'
     },
     {
       name: 'Two',
       image: {
-        uri: "http://www.newton.ac.uk/files/covers/968361.jpg",
-      }
+        uri: "http://www.freedigitalphotos.net/images/img/homepage/87357.jpg",
+      },
+      source: 'google_images'
     },
     {
       name: 'Three',
       image: {
         uri: "https://ckinknoazoro.files.wordpress.com/2011/06/random.jpg",
-      }
+      },
+      source: 'random'
     }
 ];
 
@@ -47,12 +50,13 @@ export class RandomSwiper extends Component {
   componentWillMount() {
     fetch('http://192.168.0.104:8080/')
        .then((data) => data.json())
-       .then((data) => {
+       .then((jsonData) => {
           cards.push({
-            name: 'Xkcd',
+            name: jsonData.safe_title,
             image: {
-              uri: data.img,
-            }
+              uri: jsonData.img,
+            },
+            source: 'Xkcd'
           })
         })
        .done();
@@ -68,15 +72,15 @@ export class RandomSwiper extends Component {
           <Card style={{ elevation: 3 }}>
             <CardItem>
               <Thumbnail source={item.image} />
-              <Text>Instrumental Songs</Text>
-              <Text note>Guitar</Text>
+              <Text>{item.name}</Text>
+              <Text note>{item.name}</Text>
             </CardItem>
             <CardItem>
-              <Image style={{ resizeMode: 'cover', width: null }} source={item.image} />
+              <Image style={{ resizeMode: 'contain', alignSelf: 'auto' }} source={item.image} />
             </CardItem>
             <CardItem>
               <Icon name="ios-heart" style={{ color: '#ED4A6A' }} />
-              <Text>{item.name}</Text>
+              <Text>{item.source}</Text>
             </CardItem>
           </Card>
         }>
