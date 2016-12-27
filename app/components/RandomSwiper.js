@@ -13,6 +13,8 @@ import {
   Image
 } from 'react-native';
 
+import FitImage from 'react-native-fit-image';
+
 const cards = [
     {
       name: 'One',
@@ -76,7 +78,10 @@ export class RandomSwiper extends Component {
               <Text note>{item.name}</Text>
             </CardItem>
             <CardItem>
-              <Image style={{ resizeMode: 'contain', alignSelf: 'auto' }} source={item.image} />
+              <FitImage
+                resizeMode="contain"
+                source={item.image}
+              />
             </CardItem>
             <CardItem>
               <Icon name="ios-heart" style={{ color: '#ED4A6A' }} />
